@@ -31,7 +31,7 @@ public class MainActivity extends Activity{
         
         txtvHeading = (TextView) findViewById(R.id.txtvHeading);
         
-    	handler.postDelayed(runnable, 1000);
+    	handler.postDelayed(runnable, 0);
 	}
 
 	private Runnable runnable = new Runnable() {
@@ -40,7 +40,7 @@ public class MainActivity extends Activity{
 			txtvHeading.setText("Heading: " + mModule.getHeading());
 			//yAView.setText("Y Acceleration: " + mModule.getAccelerationY());
 			//zAView.setText("Z Acceleration: " + mModule.getAccelerationZ());
-			handler.postDelayed(this, 1000);
+			handler.postDelayed(this, 0);
 		}
 	};
 
