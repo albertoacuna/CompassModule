@@ -14,12 +14,16 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
+import android.widget.TextView;
+import android.view.Menu;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class OrientationMngr {
+	
+
 	/**
      * The minimum distance desired between location notifications.
      */
@@ -98,7 +102,7 @@ public class OrientationMngr {
                 notifyAccuracyChanged();
             }
         }
-
+        
         @Override
         public void onSensorChanged(SensorEvent event) {
             if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
@@ -118,7 +122,7 @@ public class OrientationMngr {
                 float magneticHeading = (float) Math.toDegrees(mOrientation[0]);
                 mHeading = MathUtils1.mod(computeTrueNorth(magneticHeading), 360.0f)
                         - ARM_DISPLACEMENT_DEGREES;
-
+                
                 notifyOrientationChanged();
             }
         }
