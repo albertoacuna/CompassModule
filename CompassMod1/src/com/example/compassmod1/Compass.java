@@ -1,15 +1,11 @@
 package com.example.compassmod1;
 
-import com.example.compassmod1.MathUtils1;
-
-import android.app.Activity;
-import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.view.View;
 import android.widget.TextView;
+import android.hardware.GeomagneticField;
 
 public class Compass implements SensorEventListener {
 	
@@ -21,16 +17,20 @@ public class Compass implements SensorEventListener {
 	SensorManager mSensorManager;
     private final float[] mRotationMatrix;
     private final float[] mOrientation;
+    private GeomagneticField mGeomagneticField;
+    private Position mPosition;
 
 	
-	public Compass (SensorManager mSM){
+	public Compass (SensorManager mSM, Position position){
         mRotationMatrix = new float[16];
         mOrientation = new float[9];
 		mSensorManager = mSM;
+		mPosition =position;
 		mMagneticSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 		mRotationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 		mSensorManager.registerListener(this, mMagneticSensor, SensorManager.SENSOR_DELAY_NORMAL);
 		mSensorManager.registerListener(this, mRotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+		mGeomagneticField = mPosition.getGeomagneticField();
 	}
 
     @Override
@@ -42,9 +42,9 @@ public class Compass implements SensorEventListener {
     }
     
     public void updateAzimuth(SensorEvent event){
-    		mSensorManager.getRotationMatrixFromVector(mRotationMatrix, event.values);
-    		mSensorManager.remapCoordinateSystem(mRotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Z, mRotationMatrix);
-    		mSensorManager.getOrientation(mRotationMatrix, mOrientation);
+    		SensorManager.getRotationMatrixFromVector(mRotationMatrix, event.values);
+    		SensorManager.remapCoordinateSystem(mRotationMatrix, SensorManager.AXIS_X, SensorManager.AXIS_Z, mRotationMatrix);
+    		SensorManager.getOrientation(mRotationMatrix, mOrientation);
     		
     		// Store the pitch (used to display a message indicating that the user's head
             // angle is too steep to produce reliable results.
@@ -53,7 +53,8 @@ public class Compass implements SensorEventListener {
             // Convert the heading (which is relative to magnetic north) to one that is
             // relative to true north, using the user's current location to compute this.
             float magneticHeading = (float) Math.toDegrees(mOrientation[0]);
-            mHeading = magneticHeading; // TODO: Calculate True North
+            mHeading = MathUtils1.mod(computeTrueNorth(-magneticHeading), 360.0f);
+            
     }
     
     @Override
@@ -66,13 +67,13 @@ public class Compass implements SensorEventListener {
 		return mHeading;
 	}
 	
-    /*
+    
     private float computeTrueNorth(float heading) {
         if (mGeomagneticField != null) {
             return heading + mGeomagneticField.getDeclination();
         } else {
             return heading;
         }
-    }*/
+    }
 
 }
