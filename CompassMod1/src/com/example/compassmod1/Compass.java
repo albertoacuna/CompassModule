@@ -53,7 +53,7 @@ public class Compass implements SensorEventListener {
             // Convert the heading (which is relative to magnetic north) to one that is
             // relative to true north, using the user's current location to compute this.
             float magneticHeading = (float) Math.toDegrees(mOrientation[0]);
-            mHeading = MathUtils1.mod(computeTrueNorth(-magneticHeading), 360.0f);
+            mHeading = MathUtils1.mod(computeTrueNorth(magneticHeading), 360.0f);
             
     }
     
