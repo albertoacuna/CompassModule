@@ -20,6 +20,8 @@ public class MainActivity extends Activity{
 
 	private Handler handler = new Handler();
 	private TextView txtvHeading;
+	private TextView txtLat; 
+	private TextView txtLong;
 	private SensorModule mModule;
 
 	@Override
@@ -30,7 +32,8 @@ public class MainActivity extends Activity{
 		mModule = new SensorModule(this);
         
         txtvHeading = (TextView) findViewById(R.id.txtvHeading);
-        
+        txtLat = (TextView) findViewById(R.id.txtLat);
+        txtLong = (TextView) findViewById(R.id.txtLong);
     	handler.postDelayed(runnable, 0);
 	}
 
@@ -38,6 +41,8 @@ public class MainActivity extends Activity{
 		@Override
 		public void run() {
 			txtvHeading.setText("Heading: " + mModule.getHeading());
+			txtLat.setText("Lat: " + mModule.getLatitude());
+			txtLong.setText("Lat: " + mModule.getLongitude());
 			//yAView.setText("Y Acceleration: " + mModule.getAccelerationY());
 			//zAView.setText("Z Acceleration: " + mModule.getAccelerationZ());
 			handler.postDelayed(this, 0);

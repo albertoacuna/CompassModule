@@ -27,6 +27,14 @@ public class SensorModule {
 	public String getHeading(){
 		return Float.toString(mCompass.getHeading());
 	}
+	
+	public double getLatitude(){
+		return mPosition.getLatitude();
+	}
+	
+	public double getLongitude(){
+		return mPosition.getLongitude();
+	}
 
 
 	//public String getAccelerationX()
