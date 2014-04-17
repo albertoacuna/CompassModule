@@ -1,4 +1,4 @@
-package com.example.compassmod1;
+package com.cubic.sensingmodule;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +10,7 @@ public class SensorModule {
 	//instances of sensors
 	SensorManager mSensorManager;
 	LocationManager mLocationManager;
-	Compass mCompass;
+	Orientation mCompass;
 	Position mPosition;
 	//Accelerometer mAccelerometer;
 
@@ -20,7 +20,7 @@ public class SensorModule {
 		
 		mPosition = new Position(mLocationManager);
 		
-		mCompass = new Compass(mSensorManager, mPosition);
+		mCompass = new Orientation(mSensorManager, mPosition);
 		//mAccelerometer = new Accelerometer(mSensorManager);
 	}
 	

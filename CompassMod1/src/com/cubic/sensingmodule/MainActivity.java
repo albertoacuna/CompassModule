@@ -1,19 +1,12 @@
-package com.example.compassmod1;
+package com.cubic.sensingmodule;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import com.example.compassmod1.R;
 
-import com.example.compassmod1.MathUtils1;
-
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
-import android.view.Menu;
 import android.widget.TextView;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
+
 
 public class MainActivity extends Activity{
 	
@@ -42,10 +35,10 @@ public class MainActivity extends Activity{
 		public void run() {
 			txtvHeading.setText("Heading: " + mModule.getHeading());
 			txtLat.setText("Lat: " + mModule.getLatitude());
-			txtLong.setText("Lat: " + mModule.getLongitude());
+			txtLong.setText("Long: " + mModule.getLongitude());
 			//yAView.setText("Y Acceleration: " + mModule.getAccelerationY());
 			//zAView.setText("Z Acceleration: " + mModule.getAccelerationZ());
-			handler.postDelayed(this, 0);
+			handler.postDelayed(this, 10);
 		}
 	};
 

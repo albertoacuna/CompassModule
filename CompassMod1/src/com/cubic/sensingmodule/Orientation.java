@@ -1,4 +1,4 @@
-package com.example.compassmod1;
+package com.cubic.sensingmodule;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -7,7 +7,7 @@ import android.hardware.SensorManager;
 import android.widget.TextView;
 import android.hardware.GeomagneticField;
 
-public class Compass implements SensorEventListener {
+public class Orientation implements SensorEventListener {
 	
 	private Sensor mMagneticSensor = null;
 	private Sensor mRotationSensor = null;
@@ -21,7 +21,7 @@ public class Compass implements SensorEventListener {
     private Position mPosition;
 
 	
-	public Compass (SensorManager mSM, Position position){
+	public Orientation (SensorManager mSM, Position position){
         mRotationMatrix = new float[16];
         mOrientation = new float[9];
 		mSensorManager = mSM;

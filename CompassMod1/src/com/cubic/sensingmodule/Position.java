@@ -1,4 +1,4 @@
-package com.example.compassmod1;
+package com.cubic.sensingmodule;
 
 import android.location.LocationManager;
 import android.location.LocationListener;
@@ -17,6 +17,7 @@ public class Position implements LocationListener{
 		locationmanager = locManager;
 		Criteria criteria = new Criteria();
 		provider = locationmanager.getBestProvider(criteria, true);
+		locationmanager.requestLocationUpdates(provider, 1000, .1f, this);
 		location = locationmanager.getLastKnownLocation(provider);
 	}
 
@@ -25,8 +26,8 @@ public class Position implements LocationListener{
 	}
 
 	@Override
-	public void onLocationChanged(Location location){
-		location = locationmanager.getLastKnownLocation(provider);
+	public void onLocationChanged(Location newLocation){
+		location = newLocation;
 		updateGeomagneticField();
 	}
 

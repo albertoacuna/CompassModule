@@ -1,4 +1,4 @@
-package com.example.compassmod1;
+package com.cubic.sensingmodule;
 
 public class MathUtils1 {
 
